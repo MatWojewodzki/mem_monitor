@@ -22,11 +22,13 @@ def current_time_log():
 
 def monitor(db_driver, db_server, db_name, db_user, db_pass):
     cnxn = db_handler.create_db_connection(db_driver, db_server, db_name, db_user, db_pass)
+
     last_time = time.perf_counter()
     while True:
         memory_info = memory.get_memory_info()
         print(f'[MEM_LOG][{current_time_log()}] {memory_info}')
         db_handler.insert_data(cnxn, memory_info)
+
         desired_dt = os.getenv(INTERVAL_ENV, DEFAULT_SAMPLING_INTERVAL)
         time.sleep(desired_dt - (time.perf_counter() - last_time))
         last_time = time.perf_counter()

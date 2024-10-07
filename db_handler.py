@@ -1,4 +1,3 @@
-import os
 import pyodbc
 
 
@@ -20,7 +19,6 @@ def _prepare_table(cnxn):
 
 
 def create_db_connection(db_driver, db_server, db_name, db_user, db_pass):
-
     connection_string = f'DRIVER={db_driver};SERVER={db_server};DATABASE={db_name};UID={db_user};PWD={db_pass}'
     cnxn = pyodbc.connect(connection_string)
     _prepare_table(cnxn)
