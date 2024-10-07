@@ -1,13 +1,6 @@
 import os
 import pyodbc
 
-DRIVER = '{ODBC Driver 18 for SQL Server}'
-
-SERVER_ENV = 'DB_SERVER'
-DATABASE_ENV = 'DB_NAME'
-USERNAME_ENV = 'DB_USER'
-PASSWORD_ENV = 'DB_PASS'
-
 
 def _prepare_table(cnxn):
     delete_query = 'DROP TABLE IF EXISTS memory_log'
@@ -26,13 +19,9 @@ def _prepare_table(cnxn):
     cnxn.commit()
 
 
-def create_db_connection():
-    server = os.getenv(SERVER_ENV)
-    db_name = os.getenv(DATABASE_ENV)
-    db_user = os.getenv(USERNAME_ENV)
-    db_pass = os.getenv(PASSWORD_ENV)
+def create_db_connection(db_driver, db_server, db_name, db_user, db_pass):
 
-    connection_string = f'DRIVER={DRIVER};SERVER={server};DATABASE={db_name};UID={db_user};PWD={db_pass}'
+    connection_string = f'DRIVER={db_driver};SERVER={db_server};DATABASE={db_name};UID={db_user};PWD={db_pass}'
     cnxn = pyodbc.connect(connection_string)
     _prepare_table(cnxn)
 
