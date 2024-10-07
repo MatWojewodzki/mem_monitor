@@ -1,7 +1,7 @@
 import pyodbc
 
 
-def _prepare_table(cnxn):
+def _prepare_table(cnxn: pyodbc.Connection) -> None:
     delete_query = 'DROP TABLE IF EXISTS memory_log'
     create_query = '''
         CREATE TABLE memory_log (
@@ -18,7 +18,7 @@ def _prepare_table(cnxn):
     cnxn.commit()
 
 
-def create_db_connection(db_driver, db_server, db_name, db_user, db_pass):
+def create_db_connection(db_driver: str, db_server: str, db_name: str, db_user: str, db_pass: str) -> pyodbc.Connection:
     connection_string = f'DRIVER={db_driver};SERVER={db_server};DATABASE={db_name};UID={db_user};PWD={db_pass}'
     cnxn = pyodbc.connect(connection_string)
     _prepare_table(cnxn)
@@ -26,7 +26,7 @@ def create_db_connection(db_driver, db_server, db_name, db_user, db_pass):
     return cnxn
 
 
-def insert_data(cnxn, mem_info):
+def insert_data(cnxn: pyodbc.Connection, mem_info: dict) -> None:
     query = 'INSERT INTO memory_log (used, available) VALUES (?, ?)'
 
     cursor = cnxn.cursor()

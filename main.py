@@ -6,6 +6,7 @@ import memory
 import db_handler
 
 
+# names of the env variables
 INTERVAL_ENV = 'SAMPLING_INTERVAL'
 DRIVER_ENV = 'DB_DRIVER'
 SERVER_ENV = 'DB_SERVER'
@@ -16,11 +17,11 @@ PASSWORD_ENV = 'DB_PASS'
 DEFAULT_SAMPLING_INTERVAL = 5
 
 
-def current_time_log():
+def current_time_log() -> str:
     return time.strftime('%H:%M:%S', time.gmtime())
 
 
-def monitor(db_driver, db_server, db_name, db_user, db_pass):
+def monitor(db_driver: str, db_server: str, db_name: str, db_user: str, db_pass: str) -> None:
     cnxn = db_handler.create_db_connection(db_driver, db_server, db_name, db_user, db_pass)
 
     last_time = time.perf_counter()
