@@ -19,6 +19,7 @@ def _prepare_table(cnxn: pyodbc.Connection) -> None:
 
 
 def create_db_connection(db_driver: str, db_server: str, db_name: str, db_user: str, db_pass: str) -> pyodbc.Connection:
+    db_driver = '{' + db_driver + '}'
     connection_string = f'DRIVER={db_driver};SERVER={db_server};DATABASE={db_name};UID={db_user};PWD={db_pass}'
     cnxn = pyodbc.connect(connection_string)
     _prepare_table(cnxn)
