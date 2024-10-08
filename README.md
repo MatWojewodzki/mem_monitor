@@ -1,5 +1,5 @@
 # mem_monitor
-A simple Python script that monitors current RAM usage and writes the results to an SQL database in Azure.
+A simple Python script that monitors current RAM usage and writes the results to an SQL database on the Microsoft Azure.
 
 ## Requirements
 - Python >=3.8
